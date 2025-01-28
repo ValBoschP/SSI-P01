@@ -13,7 +13,7 @@ caracteres imprimibles
 ## Ejemplos
 ### Ejemplo 1
 __Entrada:__
-Mensaje original: SOL
+- __Mensaje original:__ SOL
 
 __Salida:__
 - __Mensaje original en binario:__ 010100110100111101001100
