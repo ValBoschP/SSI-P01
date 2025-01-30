@@ -83,6 +83,28 @@ void ProcessEncryption() {
 
 void ProcessDecryption() {
   system(CLEAR_SCREEN);
+  std::string cipher_text, binary_cipher, key, binary_key;
+  std::cout << "Enter the cipher text: ";
+  std::getline(std::cin, cipher_text);
+
+  binary_cipher = StringToBinary(cipher_text);
+  std::cout << "Cipher text (binary): " << binary_cipher << std::endl;
+  std::cout << "Cipher text (binary) length: " << binary_cipher.size() << std::endl << std::endl;
+
+  std::cout << "Enter the key (binary): ";
+  std::getline(std::cin, key);
+
+  if (key.find_first_not_of("01") != std::string::npos) {
+    std::cerr << "ERROR: The key must be a binary number." << std::endl;
+    return;
+  } else if (key.size() != binary_cipher.size()) {
+    std::cerr << "ERROR: The key and the cipher text must have the same length." << std::endl;
+    return;
+  }
+
+  std::string plain_text = VernamCipher::Decrypt(binary_cipher, key);
+  std::cout << std::endl << "Plain text (Binary): " << plain_text << std::endl;
+  std::cout << "Plain text (Text): " << BinaryToString(plain_text) << std::endl;
 }
 
 void PrintBinary(const std::string& text) {
