@@ -5,30 +5,30 @@
 #include <bitset> 
 
 void ShowMenu() {
-  std::cout << "============================\n";
+  std::cout << BOLD << YELLOW << "============================\n";
   std::cout << " VERNAM CIPHER\n";
-  std::cout << "============================\n";
-  std::cout << "1. Encrypt a message\n";
+  std::cout << "============================\n" << RESET;
+  std::cout << BOLD << BLUE << "1. Encrypt a message\n";
   std::cout << "2. Decrypt a message\n";
   std::cout << "3. Help\n";
-  std::cout << "0. Exit\n";
-  std::cout << "============================\n";
+  std::cout << RED << "0. Exit\n";
+  std::cout << YELLOW << "============================\n" << RESET;
   std::cout << "Choose an option: ";
 }
 
 void ShowHelp(){
   system(CLEAR_SCREEN);
-  std::cout << "============================\n";
+  std::cout << BOLD << BLUE << "============================\n";
   std::cout << " HELP\n";
-  std::cout << "============================\n";
+  std::cout << "============================\n" << RESET;
   std::cout << "Vernam cipher is a symmetric key encryption algorithm.\n";
   std::cout << "It uses a key that is as long as the message to encrypt.\n";
   std::cout << "The key is generated randomly and must be shared between\n";
   std::cout << "the sender and the receiver.\n";
-  std::cout << "-----------------------------\n";
+  std::cout << BOLD << "-----------------------------\n" << RESET;
   std::cout << "This program allows you to encrypt and decrypt messages\n";
   std::cout << "using the Vernam cipher algorithm.\n";
-  std::cout << "============================\n";
+  std::cout << BLUE << "============================\n" << RESET;
   std::cout << "Press ENTER to continue...";
   std::cin.get();
   system(CLEAR_SCREEN);
@@ -40,14 +40,14 @@ char BinToChar(const std::string& binary) {
 
 void ProcessEncryption() {
   system(CLEAR_SCREEN);
-  std::string message, binary_msg, key, binary_key;
-
-  std::cout << "Enter the message: ";
+  std::string message, key, binary_message;
+  
+  std::cout << BOLD << "Enter the message: " << RESET;
   std::getline(std::cin, message);
 
-  binary_msg = StringToBinary(message);
-  std::cout << "Original message (binary): " << binary_msg << std::endl;
-  std::cout << "Original message (binary) length: " << binary_msg.size() << std::endl << std::endl;
+  binary_message = StringToBinary(message);
+  std::cout << GREEN << "Original message (binary): " << RESET << binary_message << std::endl;
+  std::cout << "Original message (binary) length: " << binary_message.size() << "\n\n";
 
   std::cout << "Generate random key? (y/n): ";
   char key_option;
@@ -55,56 +55,35 @@ void ProcessEncryption() {
   std::cin.ignore();
 
   if (key_option == 'y' || key_option == 'Y') {
-    key = VernamCipher::GenerateKey(binary_msg.size());
-    binary_key = key;
-
-    std::cout << std::endl << "Key: " << binary_key << std::endl;
-    std::cout << "Key length: " << binary_key.size() << std::endl;
-  } else if (key_option == 'n' || key_option == 'N') {
+    key = VernamCipher::GenerateKey(binary_message.size());
+    std::cout << BOLD << "Generated Key: " << RESET << key << "\n";
+  } else {
     std::cout << "Enter the key (binary): ";
     std::getline(std::cin, key);
-    // Si la key no es binario dar error
-    if (key.find_first_not_of("01") != std::string::npos) {
-      std::cerr << "ERROR: The key must be a binary number." << std::endl;
-      return;
-    }
-    std::cout << "Key: " << key << std::endl;
-    // DEBUG
-    // std::cout << "Key length: " << key.size() << std::endl;
-  } else {
-    std::cerr << "ERROR: Invalid option." << std::endl;
-    return;
   }
 
-  std::string cipher_text = VernamCipher::Encrypt(binary_msg, key);
-  std::cout << std::endl << "Cipher text (Binary): " << cipher_text << std::endl;
-  std::cout << "Cipher text (Text): " << BinaryToString(cipher_text) << std::endl;
+  std::string encrypted_binary = VernamCipher::Encrypt(binary_message, key);
+  std::cout << std::endl << BLUE << "Cipher text (Binary): " << RESET << encrypted_binary << std::endl;
+  std::cout << BOLD << "Cipher text (Text): " << RESET << BinaryToString(encrypted_binary) << std::endl;
 }
 
 void ProcessDecryption() {
   system(CLEAR_SCREEN);
-  std::string cipher_text, binary_cipher, key, binary_key;
-  std::cout << "Enter the cipher text: ";
-  std::getline(std::cin, cipher_text);
+  std::string encrypted_message, key, binary_encrypted_message;
+  
+  std::cout << BOLD << "Enter the cipher text: " << RESET;
+  std::getline(std::cin, encrypted_message);
 
-  binary_cipher = StringToBinary(cipher_text);
-  std::cout << "Cipher text (binary): " << binary_cipher << std::endl;
-  std::cout << "Cipher text (binary) length: " << binary_cipher.size() << std::endl << std::endl;
+  binary_encrypted_message = StringToBinary(encrypted_message);
+  std::cout << RED << "Cipher text (binary): " << RESET << binary_encrypted_message << std::endl;
+  std::cout << "Cipher text (binary) length: " << binary_encrypted_message.size() << "\n\n";
 
-  std::cout << "Enter the key (binary): ";
+  std::cout << "Enter the key: ";
   std::getline(std::cin, key);
 
-  if (key.find_first_not_of("01") != std::string::npos) {
-    std::cerr << "ERROR: The key must be a binary number." << std::endl;
-    return;
-  } else if (key.size() != binary_cipher.size()) {
-    std::cerr << "ERROR: The key and the cipher text must have the same length." << std::endl;
-    return;
-  }
-
-  std::string plain_text = VernamCipher::Decrypt(binary_cipher, key);
-  std::cout << std::endl << "Plain text (Binary): " << plain_text << std::endl;
-  std::cout << "Plain text (Text): " << BinaryToString(plain_text) << std::endl;
+  std::string decrypted_binary = VernamCipher::Decrypt(binary_encrypted_message, key);
+  std::cout << GREEN << "Decrypted message (binary): " << RESET << decrypted_binary << std::endl;
+  std::cout << BOLD << "Decrypted message (Text): " << RESET << BinaryToString(decrypted_binary) << std::endl;
 }
 
 void PrintBinary(const std::string& text) {
