@@ -1,5 +1,0 @@
-/home/valer/SSI/SSI-P01/build/CMakeFiles/edit_cache.dir
-/home/valer/SSI/SSI-P01/build/CMakeFiles/rebuild_cache.dir
-/home/valer/SSI/SSI-P01/build/src/CMakeFiles/Vernam.dir
-/home/valer/SSI/SSI-P01/build/src/CMakeFiles/edit_cache.dir
-/home/valer/SSI/SSI-P01/build/src/CMakeFiles/rebuild_cache.dir
