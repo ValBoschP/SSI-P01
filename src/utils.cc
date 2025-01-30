@@ -16,6 +16,9 @@
 #include <iostream>
 #include <bitset> 
 
+/**
+ * @brief Shows the main menu of the program.
+ */
 void ShowMenu() {
   std::cout << BOLD << YELLOW << "============================\n";
   std::cout << " VERNAM CIPHER\n";
@@ -28,6 +31,9 @@ void ShowMenu() {
   std::cout << "Choose an option: ";
 }
 
+/**
+ * @brief Shows the help information of the program.
+ */
 void ShowHelp(){
   system(CLEAR_SCREEN);
   std::cout << BOLD << BLUE << "============================\n";
@@ -46,10 +52,19 @@ void ShowHelp(){
   system(CLEAR_SCREEN);
 }
 
+/**
+ * @brief Converts a binary string to a character.
+ * @param binary The binary string to convert.
+ * @return The character.
+ */
 char BinToChar(const std::string& binary) {
   return static_cast<char>(std::stoi(binary, nullptr, 2));
 }
 
+/**
+ * @brief Encrypts a message using the Vernam cipher algorithm.
+ * The user can choose to generate a random key or enter a custom key.
+ */
 void ProcessEncryption() {
   system(CLEAR_SCREEN);
   std::string message, key, binary_message;
@@ -79,6 +94,10 @@ void ProcessEncryption() {
   std::cout << BOLD << "Cipher text (Text): " << RESET << BinaryToString(encrypted_binary) << std::endl;
 }
 
+/**
+ * @brief Decrypts a message using the Vernam cipher algorithm.
+ * The user must enter the cipher text and the key used to encrypt the message.
+ */
 void ProcessDecryption() {
   system(CLEAR_SCREEN);
   std::string encrypted_message, key, binary_encrypted_message;
@@ -98,6 +117,10 @@ void ProcessDecryption() {
   std::cout << BOLD << "Decrypted message (Text): " << RESET << BinaryToString(decrypted_binary) << std::endl;
 }
 
+/**
+ * @brief Prints the binary representation of a text.
+ * @param text The text to convert to binary.
+ */
 void PrintBinary(const std::string& text) {
   for (char character : text) {
     std::cout << std::bitset<8>(character);
@@ -105,6 +128,11 @@ void PrintBinary(const std::string& text) {
   std::cout << std::endl;
 }
 
+/**
+ * @brief Converts a text to a binary string.
+ * @param text The text to convert.
+ * @return The binary string.
+ */
 std::string StringToBinary(const std::string& text) {
   std::string binary;
   for (char character : text) {
@@ -113,6 +141,11 @@ std::string StringToBinary(const std::string& text) {
   return binary;
 }
 
+/**
+ * @brief Converts a binary string to a text.
+ * @param binary The binary string to convert.
+ * @return The text.
+ */
 std::string BinaryToString(const std::string& binary) {
   std::string text;
   for (size_t i = 0; i < binary.size(); i += 8) {

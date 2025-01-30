@@ -18,6 +18,12 @@
 #include <stdexcept>
 #include <iostream>
 
+/**
+ * @brief Encrypts a plain text using the Vernam cipher algorithm.
+ * @param plain_text The plain text to encrypt.
+ * @param key The key to encrypt the plain text.
+ * @return The cipher text.
+ */
 std::string VernamCipher::Encrypt(const std::string& plain_text, const std::string& key) {
   /* -- DEBUG --
   std::cout << "text: " << plain_text << std::endl;
@@ -40,11 +46,17 @@ std::string VernamCipher::Encrypt(const std::string& plain_text, const std::stri
   // std::cout << "cipher text: " << cipher_text << std::endl;
   return cipher_text;
 }
+
+/**
+ * @brief Decrypts a cipher text using the Vernam cipher algorithm.
+ * @param cipher_text The cipher text to decrypt.
+ * @param key The key to decrypt the cipher text.
+ * @return The plain text.
+ */
 std::string VernamCipher::Decrypt(const std::string& cipher_text, const std::string& key) {
   return Encrypt(cipher_text, key);
 }
 
-// Generate a random key in binary with the specified length
 std::string VernamCipher::GenerateKey(size_t length) {
   std::string key;
   for (size_t i = 0; i < length; ++i) {

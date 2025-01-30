@@ -15,6 +15,13 @@
 
 #include <string>
 
+/**
+ * @brief Class that implements the Vernam cipher algorithm.
+ * The Vernam cipher is a symmetric key encryption algorithm.
+ * It uses a key that is as long as the message to encrypt.
+ * The key is generated randomly and must be shared between
+ * the sender and the receiver.
+ */
 class VernamCipher {
  public:
   static std::string Encrypt(const std::string& plain_text, const std::string& key);
