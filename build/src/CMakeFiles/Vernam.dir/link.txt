@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -Wl,--export-dynamic -rdynamic CMakeFiles/Vernam.dir/main.cc.o CMakeFiles/Vernam.dir/utils.cc.o CMakeFiles/Vernam.dir/vernam_cipher.cc.o -o ../bin/Vernam 
