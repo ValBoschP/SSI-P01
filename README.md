@@ -1,5 +1,18 @@
 # SSI-P01
 # Práctica 1: Cifrado de Vernam
+## Cómo compilar y ejecutar el programa
+> [!WARNING]
+> Es necesario tener instalado **'make'** y **'cmake'**. Además de **'g++'** y **'gcc'**.
+```bash
+$ make clean
+$ make build
+$ ./build/bin/Vernam
+```
+ó
+```bash
+$ make reload
+$ ./build/bin/Vernam
+```
 ## Objetivo
 Implementar el cifrado de Vernam
 ## Desarrollo
@@ -40,17 +53,3 @@ Clave aleatoria: 0000111100100001
 __Salida:__
 - __Mensaje cifrado:__ 0101010001010101
 - __Mensaje cifrado:__ TU
-
-## Cómo compilar y ejecutar el programa
-> [!WARNING]
-> Es necesario tener instalado **'make'** y **'cmake'**. Además de **'g++'** y **'gcc'**.
-```bash
-$ make clean
-$ make build
-$ ./build/bin/Vernam
-```
-ó
-```bash
-$ make reload
-$ ./build/bin/Vernam
-```

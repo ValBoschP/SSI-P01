@@ -52,6 +52,19 @@ void ShowHelp(){
   system(CLEAR_SCREEN);
 }
 
+bool IsStringASCII(const std::string& text) {
+  for (char character : text) {
+    if (!IsASCII(character)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool IsASCII(const char character) {
+  return character >= 0 && character <= 127;
+}
+
 /**
  * @brief Converts a binary string to a character.
  * @param binary The binary string to convert.
@@ -91,6 +104,7 @@ void ProcessEncryption() {
 
   std::string encrypted_binary = VernamCipher::Encrypt(binary_message, key);
   std::cout << std::endl << BLUE << "Cipher text (Binary): " << RESET << encrypted_binary << std::endl;
+  
   std::cout << BOLD << "Cipher text (Text): " << RESET << BinaryToString(encrypted_binary) << std::endl;
 }
 
@@ -135,6 +149,9 @@ void PrintBinary(const std::string& text) {
  */
 std::string StringToBinary(const std::string& text) {
   std::string binary;
+  if (!IsStringASCII(text)) {
+    return "Invalid ASCII characters";
+  }
   for (char character : text) {
     binary += std::bitset<8>(character).to_string();
   }
@@ -151,6 +168,10 @@ std::string BinaryToString(const std::string& binary) {
   for (size_t i = 0; i < binary.size(); i += 8) {
     std::string byte = binary.substr(i, 8);
     text += static_cast<char>(std::stoi(byte, nullptr, 2));
+  }
+  if (!IsStringASCII(text)) {
+    std::cout << RED << "ERROR: " << RESET << text << std::endl;
+    return "Invalid ASCII characters";
   }
   return text;
 }

@@ -31,6 +31,8 @@
 
 void ShowMenu();
 void ShowHelp();
+bool IsStringASCII(const std::string& text);
+bool IsASCII(const char character);
 void ProcessEncryption();
 void ProcessDecryption();
 void PrintBinary(const std::string& text);
